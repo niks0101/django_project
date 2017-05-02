@@ -1,0 +1,73 @@
+<div class="row-offcanvas row-offcanvas-left">
+    <div id="sidebar" class="sidebar-offcanvas">
+        <div class="col-md-12">
+            <ul class="nav nav-pills nav-stacked">
+                <li ng-repeat="main_questions in data track by $index">
+                    <a title="[[ main_questions.questionset_title ]]" ng-click="showQuestions(main_questions.id)">Q: [[
+                        main_questions.questionset_title ]]</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="main">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <h2>Project Details</h2>
+                <div class="panel panel-default">
+                    <div class="panel-heading">[[project.project_title]]</div>
+                    <div class="panel-body">
+                        <div>
+                            <h3>Questions</h3>
+                            <div class="panel-group" id="questions">
+                                <div class="panel panel-default">
+                                    <form enctype="multipart/form-data">
+                                    <div class="panel-heading accordion-toggle" data-toggle="collapse"
+                                         data-parent="#questions"
+                                         data-target="#question[[$index]]">
+                                        <h4 class="panel-title">
+                                            <a href="">Q: [[ main_question.questionset_title ]]</a> <span> Question Set Result : -  <strong ng-if="main_question.questionset_result == 1">In place</strong><strong ng-if="main_question.questionset_result == 2">In place with cons</strong><strong ng-if="main_question.questionset_result == 3">N/A</strong><strong ng-if="main_question.questionset_result == 4">Not Tested</strong><strong ng-if="main_question.questionset_result == 5">Not in place</strong><span>
+                                        </h4>
+                                    </div>
+                                    <div id="question[[$index]]" class="panel-collapse collapse" style="">
+                                        <div class="panel-body" ng-repeat="question in main_question.questions">
+                                            <div>
+                                                <label>[[question.userquestion.question_title]]</label>
+                                            </div>
+                                            <div class="radio-inline">
+                                                <label class="radio-inline"><input type="radio" ng-value="1"  ng-model="question.answer_option"  name="optradio[[$index]]">In place</label>
+                                                <label class="radio-inline"><input type="radio" ng-value="2"  ng-model="question.answer_option"  name="optradio[[$index]]">In Place with cons</label>
+                                                <label class="radio-inline"><input type="radio" ng-value="3"  ng-model="question.answer_option"  name="optradio[[$index]]">N/A</label>
+                                                <label class="radio-inline"><input type="radio" ng-value="4"  ng-model="question.answer_option"  name="optradio[[$index]]">Not Tested</label>
+                                                <label class="radio-inline"><input type="radio" ng-value="5"  ng-model="question.answer_option"  name="optradio[[$index]]">Not In Place</label>
+                                            </div>
+                                             <div class="form-group">
+                                                <label for="comment">Comment:</label>
+                                                <textarea class="form-control" rows="5" id="userquestioncomment" required  ng-model="question.comment"></textarea>
+                                             </div>
+                                        </div>
+                                        <!--div class="form-group">
+                                            <label for="comment">Comment:</label>
+                                            <textarea class="form-control" rows="5" id="comment" required="required"
+                                                      ng-model="main_question.comment"></textarea>
+                                        </div-->
+
+                                        <input type="file" name="file1" onchange="angular.element(this).scope().LoadFileData(this.files)"/>
+                                        <!--input type="file" name="file2" onchange="angular.element(this).scope().LoadFileData(this.files)"/ -->
+                                        <ul>
+                                            <li ng-repeat="file in files">{{file.name}}</li>
+                                        </ul>
+                                        <button type="submit" class="btn btn-primary"
+                                                ng-click="submitForm(main_question.id)">Submit
+                                        </button>
+                                    </div>
+                                    </form>
+                                </div>
+
+
+                            </div><!--/panel-group-->
+                        </div><!--/container--></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
