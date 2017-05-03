@@ -7,7 +7,7 @@ class Project(models.Model):
     project_description = models.TextField()
     project_author_name = models.CharField(max_length=100)
     project_version = models.DecimalField(max_digits=4, decimal_places=2)
-    user=models.ForeignKey(User,related_name='user', on_delete=models.CASCADE)
+    user=models.ForeignKey(User,related_name='projects', on_delete=models.CASCADE)
 
 class QuestionSet(models.Model):
     project = models.ForeignKey(Project,  related_name='questionset', on_delete=models.CASCADE)
