@@ -2,12 +2,7 @@ from rest_framework import serializers
 from .models import Project,QuestionSet,UserQuestionAnswer,UserQuestion
 from django.contrib.auth.models import User
 
-class UserSerializer(serializers.ModelSerializer):
-    projects = serializers.PrimaryKeyRelatedField(many=True, queryset=Project.objects.all())
 
-    class Meta:
-        model = User
-        fields = ('id', 'username', 'projects')
 
 class UserQuestionSerializer(serializers.ModelSerializer):
 
@@ -76,6 +71,11 @@ class ProjectSerializer(serializers.ModelSerializer):
         model = Project
         fields = ('id','project_title', 'project_description', 'project_author_name', 'project_version','user_id','questionset')
 
+class UserSerializer(serializers.ModelSerializer):
+    projects = ProjectSerializer(many=True,read_only=False)
 
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'projects')
 
 
